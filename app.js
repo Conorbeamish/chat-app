@@ -1,15 +1,25 @@
-const express = require("express");
-const app = express();
-
-//use the template engine ejs
+const   express = require("express"), 
+        app = express();
+    
+//Use the template engine ejs
 app.set("view engine", "ejs");
 
-//middleware to serve files from "public" root directory
+//Middleware to serve files from "public" root directory
 app.use(express.static("public"));
 
+//Routes
 app.get("/", function(req, res){
     res.render("index");
 });
 
 server = app.listen(3000);
+
+//Set up socket.io
+io = require("socket.io")(server);
+
+//Check for user connections 
+io.on("connection", (socket) => {
+    console.log("User has connected");
+})
+
 
