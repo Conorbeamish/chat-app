@@ -20,6 +20,16 @@ io = require("socket.io")(server);
 //Check for user connections 
 io.on("connection", (socket) => {
     console.log("User has connected");
-})
+
+    socket.username = "Anon"
+
+    socket.on("changeUsername", (data) => {
+        socket.username = data.username
+    });
+
+    socket.on("new-message", (data) => {
+        io.sockets.emit("new-message", {message: data.message, username: socket.username});
+    })
+});
 
 
