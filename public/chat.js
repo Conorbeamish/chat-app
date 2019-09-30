@@ -13,6 +13,7 @@ $(function(){
 
     sendMessage.click(function(){
         socket.emit("new-message", {message: message.val()});
+        $("#message").val("");
     });
 
     socket.on("new-message", (data) => {
