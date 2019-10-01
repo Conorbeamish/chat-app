@@ -19,8 +19,14 @@
 
 <body>
     <nav class="navbar">
-        <a href="/login">Login</a>
-        <a href="/register">Register</a>
+        
+        <% if (!currentUser){ %>
+            <a href="/login">Login</a>
+            <a href="/register">Register</a>
+        <% } else { %>
+            <div id="user"><%=currentUser.username%></div>
+            <a id ="logout" href="/logout" method="POST">Logout</a>
+        <% } %>
     </nav>
     
 

@@ -8,7 +8,7 @@ $(function(){
     var chatroom = $("#chatroom");
 
     sendUsername.click(function(){
-        socket.emit("changeUsername", {username: username.val()});
+        socket.emit("change-username", {username: username.val()});
     });
 
     sendMessage.click(function(){
