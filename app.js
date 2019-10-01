@@ -9,8 +9,6 @@ const   express = require("express"),
             resave: false,
             saveUninitialized: false
         }),
-        passportSocketIo = require("passport.socketio"),
-        cookieParser = require("cookie-parser"),
         User = require("./models/user"),
         authRoutes = require("./routes/auth");
         
@@ -52,23 +50,11 @@ server = app.listen(process.env.PORT || 3000);
 //Set up socket.io
 io = require("socket.io")(server);
 
-//Share session with socket.io
-const sharedsession = require("express-socket.io-session");
-io.use(sharedsession(session, {
-    autoSave:true
-}));
-
-io.use(function(socket, next) {
-    session(socket.request, socket.request.res, next);
-});
-
 //Check for user connections 
 io.on("connection", (socket) => {
     console.log("User has connected");
 
     socket.username = "Anon"
-
-    socket.request.session 
 
     socket.on("change-username", (data) => {
         socket.username = data.username
